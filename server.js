@@ -6,7 +6,8 @@ import { PrismaClient } from "@prisma/client";
 import accountsRoutes from "./src/routes/accounts.routes.js";
 import customerRoutes from './src/routes/customer.routes.js';
 import productRoutes from "./src/routes/product.routes.js";
-
+import servicesRoutes from "./src/routes/service.routes.js";
+import posRoutes from "./src/routes/pos.routes.js";
 dotenv.config();
 const app = express();
 const prisma = new PrismaClient();
@@ -18,6 +19,8 @@ app.use(express.json());
 app.use("/api/accounts", accountsRoutes);
 app.use('/api/customers', customerRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/services", servicesRoutes);
+app.use("/pos",posRoutes);
 // Example route
 app.get("/", (req, res) => {
   res.send("Server is running 🚀");
