@@ -1785,6 +1785,15 @@ model pOSModal {
   updatedAt     DateTime
 }
 
+model unit {
+  id            Int       @id @default(autoincrement())
+  name          String    @db.VarChar(255)
+  weightPerUnit Float     @db.Float
+  unitOfMeasure String    @db.VarChar(255)
+  createdAt     DateTime? @default(now()) @db.DateTime(0)
+  updatedAt     DateTime? @default(now()) @db.DateTime(0)
+}
+
 enum CompanyStatus {
   Active
   Inactive
