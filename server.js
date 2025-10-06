@@ -10,6 +10,7 @@ import servicesRoutes from "./src/routes/service.routes.js";
 import posRoutes from "./src/routes/pos.routes.js";
 import stockTransferRoutes from "./src/routes/stockTransfer.routes.js";
 import bankDetailsRoutes from "./src/routes/bankDetailsRoutes.js"
+import salesReturnRoutes from "./src/routes/salesReturnController.js"
 dotenv.config();
 const app = express();
 const prisma = new PrismaClient();
@@ -25,6 +26,7 @@ app.use("/api/services", servicesRoutes);
 app.use("/api/stock-transfers", stockTransferRoutes);
 app.use("api/pos",posRoutes);
 app.use("/api/bankdetails",bankDetailsRoutes);
+app.use('/api/sales-returns', salesReturnRoutes);
 // Example route
 app.get("/", (req, res) => {
   res.send("Server is running 🚀");
