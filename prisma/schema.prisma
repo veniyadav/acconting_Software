@@ -525,7 +525,7 @@ model customer_balance_confirms {
   status               customer_balance_confirms_status?       @default(draft)
   confirmed_at         DateTime                                @default(now()) @db.Timestamp(0)
   confirmed_by_user_id BigInt?
-  created_at           DateTime                                @default(dbgenerated("(_utf8mb4\\'0000-00-00 00:00:00\\')")) @db.Timestamp(0)
+  created_at           DateTime                                @default(now()) @db.Timestamp(0)
 
   @@index([customer_id, as_of_date], map: "idx_confirm_customer_date")
 }
@@ -643,8 +643,8 @@ model eway_bills {
   company_id       BigInt
   ewb_no           String                    @unique(map: "ewb_no") @db.VarChar(20)
   generated_at     DateTime                  @default(now()) @db.Timestamp(0)
-  valid_from       DateTime                  @default(dbgenerated("(_utf8mb4\\'0000-00-00 00:00:00\\')")) @db.Timestamp(0)
-  valid_upto       DateTime                  @default(dbgenerated("(_utf8mb4\\'0000-00-00 00:00:00\\')")) @db.Timestamp(0)
+  valid_from       DateTime?                 @db.Timestamp(0)
+  valid_upto       DateTime                  @db.Timestamp(0)
   doc_type         eway_bills_doc_type?
   doc_no           String?                   @db.VarChar(50)
   doc_date         DateTime?                 @db.Date
@@ -674,7 +674,7 @@ model eway_bills {
   sgst_amount      Decimal?                  @default(0.00) @db.Decimal(15, 2)
   status           eway_bills_status?        @default(Active)
   cancel_reason    String?                   @db.VarChar(255)
-  cancelled_at     DateTime                  @default(dbgenerated("(_utf8mb4\\'0000-00-00 00:00:00\\')")) @db.Timestamp(0)
+  cancelled_at     DateTime                  @db.Timestamp(0)
   created_by_user  BigInt?
   created_at       DateTime                  @default(now()) @db.Timestamp(0)
   updated_at       DateTime                  @default(now()) @db.Timestamp(0)
@@ -755,7 +755,7 @@ model goods_receipts {
   photo_url         String?                @db.VarChar(255)
   status            goods_receipts_status?
   created_at        DateTime               @default(now()) @db.Timestamp(0)
-  updated_at        DateTime               @default(dbgenerated("(_utf8mb4\\'0000-00-00 00:00:00\\')")) @db.Timestamp(0)
+  updated_at        DateTime               @default(now()) @db.Timestamp(0)
 
   @@index([company_id], map: "company_id")
   @@index([purchase_order_id], map: "purchase_order_id")
@@ -944,7 +944,7 @@ model order_headers {
   status           order_headers_status?
   created_by       BigInt?
   created_at       DateTime                 @default(now()) @db.Timestamp(0)
-  updated_at       DateTime                 @default(dbgenerated("(_utf8mb4\\'0000-00-00 00:00:00\\')")) @db.Timestamp(0)
+  updated_at       DateTime                 @default(now()) @db.Timestamp(0)
 
   @@index([company_id], map: "company_id")
   @@index([created_by], map: "created_by")
@@ -1132,7 +1132,7 @@ model purchase_quotations {
   status           purchase_quotations_status? @default(Draft)
   created_by       BigInt?
   created_at       DateTime                    @default(now()) @db.Timestamp(0)
-  updated_at       DateTime                    @default(dbgenerated("(_utf8mb4\\'0000-00-00 00:00:00\\')")) @db.Timestamp(0)
+  updated_at       DateTime                    @default(now()) @db.Timestamp(0)
 
   @@index([company_id], map: "company_id")
   @@index([created_by], map: "created_by")
@@ -1281,7 +1281,7 @@ model roles {
   role_type  roles_role_type?
   status     roles_status?
   created_at DateTime         @default(now()) @db.Timestamp(0)
-  updated_at DateTime         @default(dbgenerated("(_utf8mb4\\'0000-00-00 00:00:00\\')")) @db.Timestamp(0)
+  updated_at DateTime         @default(now()) @db.Timestamp(0)
 }
 
 model sales_attachments {
